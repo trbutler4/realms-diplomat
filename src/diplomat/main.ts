@@ -11,11 +11,11 @@ import { LLMClient } from "../core/llm-client";
 import { defaultCharacter } from "../core/character";
 import { Consciousness } from "../core/consciousness";
 import { ChainOfThought } from "../core/chain-of-thought";
-import { ETERNUM_CONTEXT } from "../core/contexts";
 import * as readline from "readline";
 import { type GoalStatus } from "../core/goalManager";
 import chalk from "chalk";
 import { DiplomatAgent } from "./agent";
+import { DIPLOMAT_CONTEXT } from "./context";
 
 async function getCliInput(prompt: string): Promise<string> {
   const rl = readline.createInterface({
@@ -57,19 +57,20 @@ async function main() {
   });
 
   const realm1Dreams = new ChainOfThought(llmClient, {
-    worldState: ETERNUM_CONTEXT,
+    worldState: DIPLOMAT_CONTEXT,
     queriesAvailable: "",
     availableActions: "",
   });
 
   const realm2Dreams = new ChainOfThought(llmClient, {
-    worldState: ETERNUM_CONTEXT,
+    worldState: DIPLOMAT_CONTEXT,
     queriesAvailable: "",
     availableActions: "",
   });
 
-  const agent1 = new DiplomatAgent("6933", realm1Dreams); // Uw Rohi
-  const agent2 = new DiplomatAgent("7777", realm2Dreams); // Example second realm
+  // TODO: create some realms
+  const diplomat1 = new DiplomatAgent("6933", realm1Dreams); // Uw Rohi
+  const diplomat2 = new DiplomatAgent("7777", realm2Dreams); // Example second realm
 
   [realm1Dreams, realm2Dreams].forEach((dreams, index) => {
     const realmId = index === 0 ? "6933" : "7777"; // TODO improve this
@@ -174,11 +175,11 @@ async function main() {
 
     try {
       if (choice === "1") {
-        await agent1.sendGreeting("7777");
-        await agent2.receiveGreeting("6933", "greeting");
+        await diplomat1.sendGreeting("7777");
+        await diplomat2.receiveGreeting("6933", "greeting");
       } else if (choice === "2") {
-        await agent2.sendGreeting("6933");
-        await agent1.receiveGreeting("7777", "greeting");
+        await diplomat2.sendGreeting("6933");
+        await diplomat1.receiveGreeting("7777", "greeting");
       }
     } catch (error) {
       console.error(chalk.red("Error in diplomatic exchange:"), error);

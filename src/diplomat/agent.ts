@@ -9,25 +9,23 @@ export class DiplomatAgent {
 
   async sendGreeting(targetRealmId: string): Promise<void> {
     const greeting = `DIPLOMATIC_GREETING::INIT {
-      source_realm: ${this.realmId},
-      target_realm: ${targetRealmId},
-      message_type: "GREETING",
-      protocol_version: "1.0",
-      timestamp: ${Date.now()}
-    }`;
+source_realm: ${this.realmId},
+target_realm: ${targetRealmId},
+message_type: "GREETING",
+protocol_version: "1.0",
+timestamp: ${Date.now()}}`;
 
     await this.chainOfThought.think(greeting);
   }
 
   async receiveGreeting(sourceRealmId: string, message: string): Promise<void> {
     const response = `DIPLOMATIC_GREETING::RESPONSE {
-      source_realm: ${this.realmId},
-      target_realm: ${sourceRealmId},
-      message_type: "GREETING_RESPONSE",
-      protocol_version: "1.0",
-      timestamp: ${Date.now()},
-      acknowledgment: "RECEIVED"
-    }`;
+source_realm: ${this.realmId},
+target_realm: ${sourceRealmId},
+message_type: "GREETING_RESPONSE",
+protocol_version: "1.0",
+timestamp: ${Date.now()},
+acknowledgment: "RECEIVED"}`;
 
     await this.chainOfThought.think(response);
   }
