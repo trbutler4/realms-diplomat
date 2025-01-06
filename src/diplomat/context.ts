@@ -106,10 +106,8 @@ query GetOrders {
   s0EternumOrdersModels {
     edges {
       node {
-        maker_gives
-        taker_gives
-        maker_id
-        taker_id
+        order_id
+        hyperstructure_count
       }
     }
   }

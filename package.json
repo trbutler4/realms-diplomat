@@ -3,11 +3,15 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@apollo/server": "^4.11.3",
+    "@graphql-tools/mock": "^9.0.13",
+    "graphql": "^16.10.0"
   },
   "scripts": {
     "start": "bun run src/main.ts",
     "start:diplomat": "bun run src/diplomat/main.ts",
+    "start:graphql": "bun run src/mock-eternum/mockGraphqlServer.ts",
     "test": "vitest"
   },
   "peerDependencies": {
