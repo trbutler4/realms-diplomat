@@ -1,4 +1,3 @@
-![bg](./bg.png)
 
 # Eternum Diplomat
 
